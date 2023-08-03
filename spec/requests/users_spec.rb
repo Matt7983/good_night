@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
-  describe "POST /follow" do
-    let(:user) { FactoryBot.create(:user)}
-    let(:follower) { FactoryBot.create(:user)}
+RSpec.describe 'Users', type: :request do
+  describe 'POST /follow' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:follower) { FactoryBot.create(:user) }
 
     context 'when everything is ok' do
       before do
@@ -11,7 +11,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns the followed users' do
@@ -25,7 +25,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'returns FOLLOWER_NOT_FOUND error code' do
@@ -41,7 +41,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 409' do
-        expect(response).to have_http_status(409)
+        expect(response).to have_http_status(:conflict)
       end
 
       it 'returns FOLLOWER_ALREADY_EXISTS error code' do
@@ -50,9 +50,9 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "POST /unfollow" do
-    let(:user) { FactoryBot.create(:user)}
-    let(:follower) { FactoryBot.create(:user)}
+  describe 'POST /unfollow' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:follower) { FactoryBot.create(:user) }
 
     context 'when everything is ok' do
       before do
@@ -61,7 +61,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns the followed users' do
@@ -76,7 +76,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 200' do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns empty followed users' do
@@ -91,7 +91,7 @@ RSpec.describe "Users", type: :request do
       end
 
       it 'returns a 404' do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'returns USER_NOT_FOLLOWED error code' do
