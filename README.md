@@ -1,24 +1,68 @@
-# README
+Requirement
+===
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- ruby 3.1.3
+- bundler
+- docker-compose(To run mysql container)
 
-Things you may want to cover:
+Get Started
+===
 
-* Ruby version
+## Switch to the desired branch
 
-* System dependencies
+**We use main branch as demo.**
 
-* Configuration
+    $ git switch main
 
-* Database creation
+## Install required softwares
 
-* Database initialization
+### ruby 3.1.3
 
-* How to run the test suite
+    $ sudo apt install rbenv(for ubuntu)
+    $ brew install rbenv ruby-build(for MacOS)
+    $ echo 'eval "$(rbenv init -)"' >> ~/.bashrc #depend on which sh you choose
+    $ source ~/.bashrc
+    $ rbenv install 3.1.3
 
-* Services (job queues, cache servers, search engines, etc.)
+### bundler
 
-* Deployment instructions
+    $ RBENV_VERSION=3.1.3 gem install bundler
 
-* ...
+### docker-compose / mysql 5.6
+
+**In this project we provide docker-compose.yml to install mysql.**
+
+    $ sudo apt install docker-compose
+    $ docker-compose up -d
+    $ docker ps #to check if mysql is running successfully
+
+### install gems
+    $ bundle install
+
+## env settings
+
+**If docker-compose runs well, the database.yml settings fit mysql, no need to change.**
+
+## create rails database
+
+    $ bundle exec rake db:create
+    $ bundle exec rake db:migrate
+
+## run rails
+    # You need to set binding if you connect from other machine
+    $ bundle exec rails s
+
+RSpec
+===
+
+To run the RSpec locally, follow the steps below:
+
+## create rails database for test env
+
+    $ RAILS_ENV=test bundle exec rake db:create
+    $ RAILS_ENV=test bundle exec rake db:migrate
+
+## execute rspec
+
+    $ bundle exec rspec spec
+
