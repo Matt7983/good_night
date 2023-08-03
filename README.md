@@ -129,3 +129,90 @@ API document
   | http status | error_code | description |
   | :---------: | :--------: | :---------: |
   | 404 | USER_NOT_FOLLOWED | The follower is not followed yet |
+
+
+### User clock in
+
+- URL: `{base_url}/users/:user_id/clock_in`
+- Method: `POST`
+- Body: N/A
+- Response:
+    ```json
+    {
+        "clocks": [
+            {
+                "id": 5,
+                "user_id": 1,
+                "clock_in": "2023-08-03T19:14:40.000Z",
+                "clock_out": null,
+                "duration": null
+            },
+            {
+                "id": 4,
+                "user_id": 1,
+                "clock_in": "2023-08-03T18:59:28.000Z",
+                "clock_out": "2023-08-03T19:14:28.000Z",
+                "duration": 900
+            },
+            {
+                "id": 3,
+                "user_id": 1,
+                "clock_in": "2023-08-03T18:46:44.000Z",
+                "clock_out": "2023-08-03T18:47:08.000Z",
+                "duration": 24
+            }
+        ]
+    }
+    ```
+- Error:
+
+  ```json
+  { "error_code": "ACTIVE_CLOCK_EXISTS" }
+  ```
+
+  | http status | error_code | description |
+  | :---------: | :--------: | :---------: |
+  | 400 | ACTIVE_CLOCK_EXISTS | User has a active clock not clock out yet |
+
+### User clock out
+
+- URL: `{base_url}/users/:user_id/clock_out`
+- Method: `PUT`
+- Body: N/A
+- Response:
+    ```json
+    {
+        "clocks": [
+            {
+                "id": 5,
+                "user_id": 1,
+                "clock_in": "2023-08-03T19:14:40.000Z",
+                "clock_out": "2023-08-03T19:16:43.000Z",
+                "duration": 123
+            },
+            {
+                "id": 4,
+                "user_id": 1,
+                "clock_in": "2023-08-03T18:59:28.000Z",
+                "clock_out": "2023-08-03T19:14:28.000Z",
+                "duration": 900
+            },
+            {
+                "id": 3,
+                "user_id": 1,
+                "clock_in": "2023-08-03T18:46:44.000Z",
+                "clock_out": "2023-08-03T18:47:08.000Z",
+                "duration": 24
+            }
+        ]
+    }
+    ```
+- Error:
+
+  ```json
+  { "error_code": "NO_ACTIVE_CLOCK" }
+  ```
+
+  | http status | error_code | description |
+  | :---------: | :--------: | :---------: |
+  | 400 | NO_ACTIVE_CLOCK | User has not clocked in yet |
