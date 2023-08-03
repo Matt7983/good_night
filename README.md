@@ -66,3 +66,66 @@ To run the RSpec locally, follow the steps below:
 
     $ bundle exec rspec spec
 
+API document
+===
+
+## Users
+
+### Follow user
+
+- URL: `{base_url}/users/:user_id/follow`
+- Method: `POST`
+- Body:
+  - `follower_id`: user id that you want to follow.
+- Response:
+    ```json
+    {
+        "followed_users": [
+            {
+                "id": 1,
+                "name": "Columbus Zulauf Esq.",
+                "created_at": "2023-08-03T11:32:24.638Z",
+                "updated_at": "2023-08-03T11:32:24.638Z"
+            }
+        ]
+    }
+    ```
+- Error:
+
+  ```json
+  { "error_code": "FOLLOWER_NOT_FOUND" }
+  ```
+
+  | http status | error_code | description |
+  | :---------: | :--------: | :---------: |
+  | 404 | FOLLOWER_NOT_FOUND | The follower_id is not a valid user id |
+  | 409 | FOLLOWER_ALREADY_EXISTS | This user is already followed the follower |
+
+### Unfollow user
+
+- URL: `{base_url}/users/:user_id/unfollow`
+- Method: `POST`
+- Body:
+  - `follower_id`: user id that you want to unfollow.
+- Response:
+    ```json
+    {
+        "followed_users": [
+            {
+                "id": 1,
+                "name": "Columbus Zulauf Esq.",
+                "created_at": "2023-08-03T11:32:24.638Z",
+                "updated_at": "2023-08-03T11:32:24.638Z"
+            }
+        ]
+    }
+    ```
+- Error:
+
+  ```json
+  { "error_code": "USER_NOT_FOLLOWED" }
+  ```
+
+  | http status | error_code | description |
+  | :---------: | :--------: | :---------: |
+  | 404 | USER_NOT_FOLLOWED | The follower is not followed yet |
