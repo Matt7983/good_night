@@ -4,8 +4,10 @@ class UsersController < ApplicationController
   FollowerNotFoundError = Class.new(StandardError)
 
   def follow
-    user = User.find(params[:id])
-    user.add_follower(params[:follower_id].to_i)
+    ActiveRecord::Base.transaction do
+      user = User.lock.find(params[:id])
+      user.add_follower(params[:follower_id].to_i)
+    end
 
     render json: { followed_users: user.followed_users }
   rescue User::FollowerAlreadyExistsError => e
@@ -13,8 +15,10 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    user = User.find(params[:id])
-    user.remove_follower(params[:follower_id].to_i)
+    ActiveRecord::Base.transaction do
+      user = User.lock.find(params[:id])
+      user.remove_follower(params[:follower_id].to_i)
+    end
 
     render json: { followed_users: user.followed_users }
   rescue User::FollowerNotExistsError => e
