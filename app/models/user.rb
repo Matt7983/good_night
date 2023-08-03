@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :followers, class_name: "Follower", foreign_key: "followee_id", primary_key: "id", dependent: :destroy
+  has_many :clocks, dependent: :destroy
 
   FollowerAlreadyExistsError = Class.new(StandardError)
   FollowerNotExistsError = Class.new(StandardError)

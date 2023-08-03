@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_03_092231) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_03_170138) do
+  create_table "clocks", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.timestamp "clock_in", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "clock_out"
+    t.integer "duration"
+    t.index ["user_id"], name: "index_clocks_on_user_id"
+  end
+
   create_table "followers", primary_key: ["follower_id", "followee_id"], charset: "utf8mb4", force: :cascade do |t|
     t.integer "followee_id", null: false
     t.integer "follower_id", null: false
@@ -24,4 +32,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_03_092231) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "clocks", "users"
 end
