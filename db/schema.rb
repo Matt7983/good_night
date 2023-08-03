@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_03_090104) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_03_092231) do
+  create_table "followers", primary_key: ["follower_id", "followee_id"], charset: "utf8mb4", force: :cascade do |t|
+    t.integer "followee_id", null: false
+    t.integer "follower_id", null: false
+    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["followee_id"], name: "index_followers_on_followee_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
