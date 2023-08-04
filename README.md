@@ -216,3 +216,54 @@ API document
   | http status | error_code | description |
   | :---------: | :--------: | :---------: |
   | 400 | NO_ACTIVE_CLOCK | User has not clocked in yet |
+
+
+### User followers records
+
+- URL: `{base_url}/users/:user_id/followers_records`
+- Method: `GET`
+- Parameters: N/A
+- Response:
+    ```json
+    {
+        "followers_records": [
+            {
+                "user_id": 1,
+                "user_name": "Columbus Zulauf Esq.",
+                "clock_in": "2023-08-03T18:59:28.000Z",
+                "clock_out": "2023-08-03T19:14:28.000Z",
+                "duration": 900
+            },
+            {
+                "user_id": 1,
+                "user_name": "Columbus Zulauf Esq.",
+                "clock_in": "2023-08-03T18:42:03.000Z",
+                "clock_out": "2023-08-03T18:46:23.000Z",
+                "duration": 260
+            },
+            {
+                "user_id": 1,
+                "user_name": "Columbus Zulauf Esq.",
+                "clock_in": "2023-08-03T19:14:40.000Z",
+                "clock_out": "2023-08-03T19:16:43.000Z",
+                "duration": 123
+            },
+            {
+                "user_id": 1,
+                "user_name": "Columbus Zulauf Esq.",
+                "clock_in": "2023-08-03T18:46:44.000Z",
+                "clock_out": "2023-08-03T18:47:08.000Z",
+                "duration": 24
+            },
+            {
+                "user_id": 1,
+                "user_name": "Columbus Zulauf Esq.",
+                "clock_in": "2023-08-03T17:07:11.000Z",
+                "clock_out": "2023-08-03T17:07:33.000Z",
+                "duration": 22
+            }
+        ]
+    }
+    ```
+- Error: N/A
+
