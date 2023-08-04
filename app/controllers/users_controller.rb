@@ -25,6 +25,13 @@ class UsersController < ApplicationController
     render json: { error_code: 'USER_NOT_FOLLOWED' }, status: 404
   end
 
+  def followers_records
+    user = User.find(params[:id])
+    clocks = Clock.includes(:user).where(user_id: user.follower_ids).where('clock_in > ?', 7.days.ago).order(duration: :desc)
+
+    render json: { followers_records: ClockPrinter.render_as_json(clocks) }
+  end
+
   private
 
   def check_follower_exists
