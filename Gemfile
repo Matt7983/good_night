@@ -37,7 +37,9 @@ gem 'bootsnap', require: false
 # gem "rack-cors"
 
 gem 'awesome_print', require: false
+gem 'blueprinter'
 gem 'composite_primary_keys'
+gem 'oj'
 gem 'pry-rails'
 
 group :development, :test do
